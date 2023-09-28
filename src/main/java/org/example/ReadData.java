@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /** */
 @CheckReturnValue // see go/why-crv
-final class ReadData {
+final public class ReadData {
   private static final String COLUMN_FAMILY = "data";
   private static final String COLUMN_QUALIFIER_VALUE = "value";
   private static final String ROW_KEY_PREFIX = "rowKey";
