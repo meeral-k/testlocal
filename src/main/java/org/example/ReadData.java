@@ -7,8 +7,10 @@ import com.google.cloud.bigtable.data.v2.models.Row;
 import com.google.cloud.bigtable.data.v2.models.RowCell;
 import com.google.errorprone.annotations.CheckReturnValue;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.logging.LogManager;
 
 
 /** */
@@ -63,6 +65,10 @@ final public class ReadData {
   }
 
   public static void main(String[] args) throws IOException {
+    LogManager logManager = LogManager.getLogManager();
+    try (final InputStream is = ReadData.class.getResourceAsStream("/logging.properties")) {
+      logManager.readConfiguration(is);
+    }
     String projectId = "google.com:cloud-bigtable-dev";
 
     //String dataEndpoint = "bigtable.googleapis.com:443";
@@ -70,15 +76,15 @@ final public class ReadData {
     //String instanceId = "guidou-instance-1"; // prod
 
     String dataEndpoint = "test-bigtable.sandbox.googleapis.com:443";
-    String instanceId = "guidou-test-2"; // test
+    String instanceId = "mk-test-1"; // test
 
     //String dataEndpoint = "staging-bigtable.sandbox.googleapis.com:443";
 
-    String appProfileId = "mc";
+    String appProfileId = "default";
     //String appProfileId = "single";
     //String appProfileId = "default";
 
-    String tableId = "guidou-table-1";
+    String tableId = "mk-table-1";
 
     // Creates a bigtable data client.
     System.out.println("CONNECTING TO " + dataEndpoint);
